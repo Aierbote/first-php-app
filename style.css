@@ -1,0 +1,30 @@
+.gridStyle {
+	width: 90vw;
+	padding: 0;
+	margin: 1rem auto;
+	overflow: hidden;
+	display: grid;
+	grid-template-columns: repeat(3, minmax(20rem, 0.8fr));
+	column-gap: 0.5rem;
+	row-gap: 1rem;
+}
+
+.cardStyle {
+	width: 23rem;
+	height: 26rem;
+	border: 0.0625rem solid #00000029;
+	border-radius: 1rem;
+	padding: 1.5rem 1rem;
+
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: 3fr repeat(2, 1fr);
+}
+
+.cardStyle > p {
+	grid-area: 2 / 1 / 3 / 3;
+}
+.cardStyle > .priceShelf {
+	grid-area: 2 / 1 / 3 / 3;
+	text-align: end;
+}
