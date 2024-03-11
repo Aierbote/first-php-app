@@ -6,7 +6,14 @@
 		<title>Document</title>
 		<meta name="author" content="Alberto Cangialosi" />
 		<link rel="stylesheet" href="style.css" />
-		<script type="module" src="products.js"></script>
+		<script defer type="module" src="products.js"></script>
+		<script>
+			function notImplemented() {
+				alert("Not implemented yet");
+			}
+		</script>
+
+		<!-- NOTE : Moved down here because `defer` doesn't seems enough -->
 	</head>
 	<body>
 		<nav>
