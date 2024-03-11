@@ -31,25 +31,25 @@ getProducts().then(() => {
   products.forEach((product) => {
     grid.innerHTML += `
     <div class="cardStyle">
-    <figure>
-      <img src="${product.thumbnail}" alt="${product.title}" />
-    </figure>
-    <h3>${product.title}</h3>
-    <p>${product.description}</p>
+      <figure>
+        <img src="${product.thumbnail}" alt="${product.title}" />
+      </figure>
+      <h3>${product.title}</h3>
+      <p>${product.description}</p>
 
-    <div class="priceShelf">
-      <p>
-        <b>Price: ${product.price}€</b>
-      </p>
-      <p>
-        <b>In stock: ${product.qty}</b>
-      </p>
-      <button>
-        <a href="/products/${product.id}">Product details</a>
-      </button>
-      <button onclick={console.log("Not Yet Implemented!")}>Add To Cart</button>
+      <div class="priceShelf">
+        <p>
+          <b>Price: ${product.price}€</b>
+        </p>
+        <p>
+          <b>In stock: ${product.qty}</b>
+        </p>
+        <button>
+          <a href="/products/${product.id}">Product details</a>
+        </button>
+        <button onclick={console.log("Not Yet Implemented!")}>Add To Cart</button>
+      </div>
     </div>
-  </div>
     `;
   });
 });
