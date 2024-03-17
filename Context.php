@@ -38,13 +38,28 @@ class Context
 	}
 
 	// Methods
-	public function addToCart()
+	public function addToCart($idProduct)
 	{
+		$found = false;
+
+		$this->counterInCart = $this->counterInCart + 1;
+		foreach ($this->cart as $key => $cartItem) {
+			if ($cartItem->id == $idProduct) {
+				$cartItem->qty = $cartItem->qty + 1;
+				$found = true;
+				break;
+			}
+		}
+
+		if ($found != true) {
+			array_push($this->cart[], (object) ["qty" => 1, "id" => $idProduct]);
+		}
 		return null;
 	}
 
 	public function removeFromCart()
 	{
+		$this->counterInCart = $this->counterInCart - 1;
 		return null;
 	}
 
