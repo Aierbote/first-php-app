@@ -4,14 +4,15 @@
 class Context
 {
 	// Properties
-	private static $cart = array();
-	private static $paid = false;
-	private static $products = NULL;
-	private static $loading = false;
-	private static $error = "";
-	private static $counterInCart = 0;
-	private static $total = 0;
-	private static $detailProduct = (object) []; // TODO : NOTE : IDK maybe it could be a "object literal" like in js
+	public static $cart = array();
+	public static $paid = false;
+	public static $products = NULL;
+	public static $loading = false;
+	public static $error = "";
+	public static $counterInCart = 0;
+	public static $total = 0;
+	// FIXME : this cause a 500 error
+	// private static $detailProduct = (object) ; // TODO : NOTE : IDK maybe it could be a "object literal" like in js
 
 	public function __construct()
 	{
@@ -22,6 +23,10 @@ class Context
 		$this->error = "";
 		$this->counterInCart = 0;
 		$this->total = 0;
+
+		// initialize products with the call to API
+		$this->getProducts();
+
 
 		# NOTE : associative array casted into an object, closest to a object literal in js
 		// $this->detailProduct = (object) [
@@ -38,6 +43,24 @@ class Context
 	}
 
 	// Methods
+	public function getProducts()
+	{
+		$url = "https://mockend.up.railway.app/api/products/";
+		$this->loading = true;
+
+		$response = file_get_contents($url);
+		$data = json_decode($response, false);
+
+		if ($data == NULL) {
+			$this->error = "Error loading products";
+			$this->loading = false;
+			return;
+		}
+
+		$this->products = $data;
+		$this->loading = false;
+	}
+
 	public function addToCart($idProduct)
 	{
 		$found = false;
@@ -59,7 +82,6 @@ class Context
 
 	public function removeFromCart()
 	{
-		$this->counterInCart = $this->counterInCart - 1;
 		return null;
 	}
 
@@ -83,11 +105,6 @@ class Context
 		return null;
 	}
 
-	public function getProduct()
-	{
-		return null;
-	}
-
 
 	public function repr()
 	{
@@ -105,14 +122,9 @@ class Context
 			$this->counterInCart .
 			", total=" .
 			$this->total .
-			", detailProduct=" .
-			$this->detailProduct .
+			// // FIXME : this cause a 500 error
+			// ", detailProduct=" .
+			// $this->detailProduct .
 			")";
 	}
 };
-
-$myContext = new Context();
-
-
-echo " DEBUG : Context \n";
-echo $myContext->repr();
