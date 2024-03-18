@@ -1,6 +1,7 @@
 <?php
 
-$app = require("Context.php");
+$context = require("Context.php");
+$app = new Context();
 
 ?>
 
@@ -13,14 +14,11 @@ $app = require("Context.php");
 	<title>Document</title>
 	<meta name="author" content="Alberto Cangialosi" />
 	<link rel="stylesheet" href="style.css" />
-	<script defer type="module" src="products.js"></script>
 	<script>
 		function notImplemented() {
 			alert("Not implemented yet");
 		}
 	</script>
-
-	<!-- NOTE : Moved down here because `defer` doesn't seems enough -->
 </head>
 
 <body>
@@ -43,33 +41,10 @@ $app = require("Context.php");
 	<h1>Home</h1>
 	<h2>Our Products</h2>
 	<main class="gridStyle">
-		<!-- sample card -->
-
-		<!-- <div class="cardStyle">
-			<figure>
-				<img src="https://via.placeholder.com/150" alt="Product 1" />
-			</figure>
-			<h3>Product 1</h3>
-			<p>
-				Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro,
-				laborum.
-			</p>
-			<div class="priceShelf">
-				<p>
-					<b>Price: 10.0€</b>
-				</p>
-				<p>
-					<b>In stock: 10</b>
-				</p>
-				<button>Product details</button>
-				<button>Add To Cart</button>
-			</div>
-		</div>
-		-->
-
 		<?php
 
-		foreach ($products as $product) {
+		foreach ($app->products as $product) {
+
 		?>
 			<div class="cardStyle">
 				<figure>
