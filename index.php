@@ -25,15 +25,15 @@ $app = new Context();
 	<nav>
 		<ul>
 			<li>
-				<a href="/">Home</a>
+				<a href="./index.php">Home</a>
 			</li>
 			<li>
-				<a href="/cart.html">Cart</a>
+				<a href="./cart.php">Cart</a>
 			</li>
 		</ul>
 		<div>
 			<button>
-				<a href="cart.html">Cart</a>
+				<a href="./cart.php">Cart</a>
 			</button>
 		</div>
 	</nav>
@@ -62,10 +62,12 @@ $app = new Context();
 						<b>In stock: <?php echo $product->qty; ?></b>
 					</p>
 					<button>Product details</button>
-					<button>Add To Cart</button>
+					<!-- FIXME : con parametro, ma no eseguibile -->
+					<button onclick="<?php echo '$app->addToCart(' . $product->id . ')'; ?>">Add To Cart</button>
 				</div>
 			</div>
 		<?php
+
 		}
 
 		?>

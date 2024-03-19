@@ -25,20 +25,29 @@ $app = new Context();
   <nav>
     <ul>
       <li>
-        <a href="/">Home</a>
+        <a href="./index.php">Home</a>
       </li>
       <li>
-        <a href="/cart.html">Cart</a>
+        <a href="./cart.php">Cart</a>
       </li>
     </ul>
     <div>
       <button>
-        <a href="cart.html">Cart</a>
+        <a href="./cart.php">Cart</a>
       </button>
     </div>
   </nav>
 
   <h1>Cart</h1>
+  <h3>Total: <?php echo $app->total ?>€</h3>
+
+  <?php if (count($app->cart) == 0) : ?>
+    <button disabled>Cart Empty</button>
+  <?php else : ?>
+    <button>Proceed with Purchase</button>
+  <?php endif; ?>
+
+
   <main class="gridStyle">
     <?php
 
