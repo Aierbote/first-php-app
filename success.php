@@ -22,7 +22,7 @@ $app = new Context();
 </head>
 
 <body>
-  <?php include("navbar.html") ?>
+  <?php include("navbar.php") ?>
 
   <?php if (!$app->paid) : ?>
     <h1>Not paid yet</h1>

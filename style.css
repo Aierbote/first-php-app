@@ -1,3 +1,9 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
 .gridStyle {
 	width: 90vw;
 	padding: 0;
@@ -38,4 +44,33 @@
 .cardStyle > .priceShelf {
 	grid-area: 3 / 1 / 4 / 3;
 	text-align: end;
+}
+
+nav > ul {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	margin: 1rem auto;
+	width: 90vw;
+
+	list-style: none;
+}
+
+nav {
+	background: rgb(147, 200, 82);
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+
+	padding: 0.5rem 1rem;
+}
+
+nav:first-child {
+	margin-right: auto;
+}
+
+nav:last-child {
+	margin-left: auto;
 }

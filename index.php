@@ -30,7 +30,7 @@ if (isset($_POST["idProduct"])) {
 </head>
 
 <body>
-	<?php include("navbar.html") ?>
+	<?php include("navbar.php") ?>
 
 	<h1>Home</h1>
 	<h2>Our Products</h2>

@@ -32,7 +32,7 @@ var_dump($cart);
 </head>
 
 <body>
-  <?php include("navbar.html") ?>
+  <?php include("navbar.php") ?>
 
   <h1>Cart</h1>
   <h3>Total: <?php echo $app->total ?>€</h3>
