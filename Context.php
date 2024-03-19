@@ -80,13 +80,32 @@ class Context
 		return null;
 	}
 
-	public function removeFromCart()
+	public function removeFromCart($idProduct)
 	{
+		$this->counterInCart = $this->counterInCart - 1;
+		foreach ($this->cart as $key => $cartItem) {
+			if ($cartItem->id == $idProduct) {
+				$cartItem->qty = $cartItem->qty - 1;
+				$this->counterInCart = $this->counterInCart - 1;
+
+				if ($cartItem->qty == 0) {
+					unset($this->cart[$key]);
+				}
+				break;
+			}
+		}
 		return null;
 	}
 
-	public function removeTheseFromCart()
+	public function removeTheseFromCart($idProduct)
 	{
+		foreach ($this->cart as $key => $cartItem) {
+			if ($cartItem->id == $idProduct) {
+				$this->counterInCart = $this->counterInCart - $cartItem->qty;
+				unset($this->cart[$key]);
+				break;
+			}
+		}
 		return null;
 	}
 
