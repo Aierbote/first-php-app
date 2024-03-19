@@ -5,6 +5,12 @@ session_start();
 $context = require("Context.php");
 $app = new Context();
 
+if (isset($_POST["productId"])) {
+	$app->addToCart($_POST["productId"]);
+
+	$_SESSION["cart"] = serialize($app->cart);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -64,8 +70,8 @@ $app = new Context();
 						<b>In stock: <?php echo $product->qty; ?></b>
 					</p>
 					<button>Product details</button>
-					<!-- FIXME : con parametro, ma no eseguibile -->
-					<button onclick="<?php echo '$app->addToCart(' . $product->id . ')'; ?>">Add To Cart</button>
+
+					<button class="addToCartButton" data-idProduct="<?php echo $product["id"] ?>" onclick=>Add To Cart</button>
 				</div>
 			</div>
 		<?php
@@ -76,5 +82,33 @@ $app = new Context();
 
 	</main>
 </body>
+
+<script>
+	document.addEventListener("DOMContentLoaded", () => {
+		const addToCartButtons = document.querySelectorAll(".addToCartButton");
+
+		// funzione lato client per inviare una richiesta POST al server
+		addToCartButtons.forEach(
+			(button) => {
+				button.addEventListener("click", (event) => {
+					const idProduct = event.target.getAttribute("data-idProduct");
+
+					fetch("index.php", {
+							method: "POST",
+							headers: {
+								"Content-Type": "application/x-www-form-urlencoded",
+							},
+							body: "idProduct =" + idProduct,
+						})
+						.then((response) => {
+							console.log(`Hnadling product added to cart: ${response.ok}`);
+						})
+						.catch((error) => {
+							console.error(`Error during handling product added to cart ${error}`);
+						});
+				});
+			});
+	})
+</script>
 
 </html>

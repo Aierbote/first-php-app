@@ -27,10 +27,18 @@ class Context
 
 		// initialize products with the call to API
 		if (isset($_SESSION["products"])) {
-			$this->products = $_SESSION["products"];
+			$this->products = unserialize($_SESSION["products"]);
 		} else {
 			$this->fetchProducts();
-			$_SESSION["products"] = $this->products;
+			$_SESSION["products"] = serialize($this->products);
+		}
+
+		// initialize cart with saved data
+		if (isset($_SESSION["products"])) {
+			$this->products = unserialize($_SESSION["products"]);
+		} else {
+			$this->fetchProducts();
+			$_SESSION["products"] = serialize($this->products);
 		}
 
 
