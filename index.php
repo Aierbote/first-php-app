@@ -5,8 +5,8 @@ session_start();
 $context = require("Context.php");
 $app = new Context();
 
-if (isset($_POST["productId"])) {
-	$app->addToCart($_POST["productId"]);
+if (isset($_POST["idProduct"])) {
+	$app->addToCart($_POST["idProduct"]);
 
 	$_SESSION["cart"] = serialize($app->cart);
 }
@@ -71,7 +71,8 @@ if (isset($_POST["productId"])) {
 					</p>
 					<button>Product details</button>
 
-					<button class="addToCartButton" data-idProduct="<?php echo $product["id"] ?>" onclick=>Add To Cart</button>
+					<button class="addToCartButton" data-idProduct="<?php echo $product->id; ?>" onclick=>Add To Cart</button>
+
 				</div>
 			</div>
 		<?php
@@ -98,7 +99,7 @@ if (isset($_POST["productId"])) {
 							headers: {
 								"Content-Type": "application/x-www-form-urlencoded",
 							},
-							body: "idProduct =" + idProduct,
+							body: "idProduct=" + idProduct,
 						})
 						.then((response) => {
 							console.log(`Hnadling product added to cart: ${response.ok}`);

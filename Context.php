@@ -27,18 +27,26 @@ class Context
 
 		// initialize products with the call to API
 		if (isset($_SESSION["products"])) {
-			$this->products = unserialize($_SESSION["products"]);
+			$this->products = $_SESSION["products"];
 		} else {
 			$this->fetchProducts();
-			$_SESSION["products"] = serialize($this->products);
+			$_SESSION["products"] = $this->products;
 		}
 
 		// initialize cart with saved data
 		if (isset($_SESSION["products"])) {
-			$this->products = unserialize($_SESSION["products"]);
+			$this->products = $_SESSION["products"];
 		} else {
 			$this->fetchProducts();
-			$_SESSION["products"] = serialize($this->products);
+			$_SESSION["products"] = $this->products;
+		}
+
+		// initialize cart with saved data
+		if (isset($_SESSION["products"])) {
+			$this->products = $_SESSION["products"];
+		} else {
+			$this->fetchProducts();
+			$_SESSION["products"] = $this->products;
 		}
 
 
@@ -82,15 +90,17 @@ class Context
 		$this->counterInCart = $this->counterInCart + 1;
 		foreach ($this->cart as $key => $cartItem) {
 			if ($cartItem->id == $idProduct) {
-				$cartItem->qty = $cartItem->qty + 1;
+				$cartItem->qty++;
 				$found = true;
 
 				break;
 			}
 		}
 
-		if ($found != true) {
-			array_push($this->cart[], (object) ["qty" => 1, "id" => $idProduct]);
+		if (!$found) {
+			$cartItem = (object) ["qty" => 1, "id" => $idProduct];
+
+			$this->cart[] = $cartItem;
 		}
 
 		$this->total = $this->total + $cartItem->price;

@@ -1,7 +1,11 @@
 <?php
 
+session_start();
+
 $context = require("Context.php");
 $app = new Context();
+
+$cart = $_SESSION["cart"];
 
 ?>
 
@@ -51,7 +55,7 @@ $app = new Context();
   <main class="gridStyle">
     <?php
 
-    foreach ($app->cart as $cartItem) {
+    foreach ($cart as $cartItem) {
 
     ?>
       <div class="cardStyle" id="<?php echo $cartItem->id ?>">
