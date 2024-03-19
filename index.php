@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 $context = require("Context.php");
 $app = new Context();
 

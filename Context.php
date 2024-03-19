@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 
 class Context
 {
@@ -25,7 +26,12 @@ class Context
 		$this->total = 0;
 
 		// initialize products with the call to API
-		$this->getProducts();
+		if (isset($_SESSION["products"])) {
+			$this->products = $_SESSION["products"];
+		} else {
+			$this->fetchProducts();
+			$_SESSION["products"] = $this->products;
+		}
 
 
 		# NOTE : associative array casted into an object, closest to a object literal in js
@@ -43,7 +49,7 @@ class Context
 	}
 
 	// Methods
-	public function getProducts()
+	public function fetchProducts()
 	{
 		$url = "https://mockend.up.railway.app/api/products/";
 		$this->loading = true;
