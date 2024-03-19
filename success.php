@@ -22,21 +22,7 @@ $app = new Context();
 </head>
 
 <body>
-  <nav>
-    <ul>
-      <li>
-        <a href="./index.php">Home</a>
-      </li>
-      <li>
-        <a href="./cart.php">Cart</a>
-      </li>
-    </ul>
-    <div>
-      <button>
-        <a href="./cart.php">Cart</a>
-      </button>
-    </div>
-  </nav>
+  <?php include("navbar.html") ?>
 
   <?php if (!$app->paid) : ?>
     <h1>Not paid yet</h1>

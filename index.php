@@ -30,21 +30,7 @@ if (isset($_POST["idProduct"])) {
 </head>
 
 <body>
-	<nav>
-		<ul>
-			<li>
-				<a href="./index.php">Home</a>
-			</li>
-			<li>
-				<a href="./cart.php">Cart</a>
-			</li>
-		</ul>
-		<div>
-			<button>
-				<a href="./cart.php">Cart</a>
-			</button>
-		</div>
-	</nav>
+	<?php include("navbar.html") ?>
 
 	<h1>Home</h1>
 	<h2>Our Products</h2>

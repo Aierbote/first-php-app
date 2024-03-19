@@ -5,7 +5,13 @@ session_start();
 $context = require("Context.php");
 $app = new Context();
 
-$cart = $_SESSION["cart"];
+// // DEBUG :
+// unset($_SESSION["cart"]);
+
+$cart = (array) unserialize($_SESSION["cart"]);
+
+// DEBUG :
+var_dump($cart);
 
 ?>
 
@@ -26,26 +32,12 @@ $cart = $_SESSION["cart"];
 </head>
 
 <body>
-  <nav>
-    <ul>
-      <li>
-        <a href="./index.php">Home</a>
-      </li>
-      <li>
-        <a href="./cart.php">Cart</a>
-      </li>
-    </ul>
-    <div>
-      <button>
-        <a href="./cart.php">Cart</a>
-      </button>
-    </div>
-  </nav>
+  <?php include("navbar.html") ?>
 
   <h1>Cart</h1>
   <h3>Total: <?php echo $app->total ?>€</h3>
 
-  <?php if (count($app->cart) == 0) : ?>
+  <?php if (count($cart) == 0 || $cart[0] == false) : ?>
     <button disabled>Cart Empty</button>
   <?php else : ?>
     <button>Proceed with Purchase</button>
@@ -53,6 +45,11 @@ $cart = $_SESSION["cart"];
 
 
   <main class="gridStyle">
+
+    <?php if (!isset($cart) || count($cart) == 0 || $cart[0] == false) : ?>
+      <h2>Cart Empty</h2>
+    <?php endif ?>
+
     <?php
 
     foreach ($cart as $cartItem) {
