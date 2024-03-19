@@ -70,6 +70,7 @@ class Context
 			if ($cartItem->id == $idProduct) {
 				$cartItem->qty = $cartItem->qty + 1;
 				$found = true;
+
 				break;
 			}
 		}
@@ -77,6 +78,8 @@ class Context
 		if ($found != true) {
 			array_push($this->cart[], (object) ["qty" => 1, "id" => $idProduct]);
 		}
+
+		$this->total = $this->total + $cartItem->price;
 		return null;
 	}
 
@@ -91,6 +94,8 @@ class Context
 				if ($cartItem->qty == 0) {
 					unset($this->cart[$key]);
 				}
+
+				$this->total = $this->total - $cartItem->price;
 				break;
 			}
 		}
@@ -103,19 +108,30 @@ class Context
 			if ($cartItem->id == $idProduct) {
 				$this->counterInCart = $this->counterInCart - $cartItem->qty;
 				unset($this->cart[$key]);
+
+				$this->total = $this->total - ($cartItem->price * $cartItem->qty);
 				break;
 			}
 		}
 		return null;
 	}
 
-	public function pay()
+	public function pay($bool)
 	{
+		$this->paid = $bool;
 		return null;
 	}
 
 	public function done()
 	{
+		echo "done: completing purchase...<br>";
+
+		$this->pay(false);
+		$this->counterInCart = 0;
+		$this->cart = array();
+		$this->total = 0;
+
+		echo "done: purchase COMPLETED!<br>";
 		return null;
 	}
 
