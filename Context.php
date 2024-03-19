@@ -124,14 +124,10 @@ class Context
 
 	public function done()
 	{
-		echo "done: completing purchase...<br>";
-
 		$this->pay(false);
 		$this->counterInCart = 0;
 		$this->cart = array();
 		$this->total = 0;
-
-		echo "done: purchase COMPLETED!<br>";
 		return null;
 	}
 
